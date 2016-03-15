@@ -48,8 +48,10 @@
 ### В течении проекта заполните <a href="http://goo.gl/forms/Oy5A7HNkWt">форму соискателя "Разработчик Java"</a>
 Я ее рассылаю всем знакомым HR, уже есть пинги и трудоустройство.
 
+### <a href="https://join.skype.com/l3q059nLAKYj">Группа в skype: Online Projects</a>. 
+Общение на все темы IT, обсуждение вступительных заданий, вакансии, цены на рынке труда, события, помощь, интересные видео по теме и пр.
+
 ### Основные сайты поиска работы:
 - <a href="hh.ru">HH</a>
 - <a href="https://www.linkedin.com/">LinkedIn</a>
 - <a href="http://djinni.co/">djinni.co (более актуально для Украины)</a>
-- <a href="https://moikrug.ru/">moikrug</a>
