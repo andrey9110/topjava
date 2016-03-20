@@ -1,11 +1,13 @@
 package ru.javawebinar.topjava.web;
 
 import org.junit.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ru.javawebinar.topjava.UserTestData;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.repository.UserRepository;
+import ru.javawebinar.topjava.util.DbPopulator;
 import ru.javawebinar.topjava.util.exception.NotFoundException;
 import ru.javawebinar.topjava.web.user.AdminRestController;
 
@@ -21,23 +23,20 @@ public class InMemoryAdminRestControllerTest {
 
     @BeforeClass
     public static void beforeClass() {
-        appCtx = new ClassPathXmlApplicationContext("spring/spring-app.xml");
+        appCtx = new ClassPathXmlApplicationContext("classpath:spring/spring-app.xml","classpath:spring/spring-db.xml");
         System.out.println("\n" + Arrays.toString(appCtx.getBeanDefinitionNames()) + "\n");
         controller = appCtx.getBean(AdminRestController.class);
-    }
-
-    @Before
-    public void setUp() throws Exception {
-        // Re-initialize
-        UserRepository repository = appCtx.getBean(UserRepository.class);
-        repository.getAll().forEach(u -> repository.delete(u.getId()));
-        repository.save(USER);
-        repository.save(ADMIN);
     }
 
     @AfterClass
     public static void afterClass() {
         appCtx.close();
+    }
+
+    @Before
+    public void setUp() throws Exception {
+        DbPopulator dbPopulator = appCtx.getBean(DbPopulator.class);
+        dbPopulator.execute();
     }
 
     @Test
