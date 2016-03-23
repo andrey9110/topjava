@@ -8,6 +8,7 @@ import ru.javawebinar.topjava.util.UserMealsUtil;
 import java.util.EnumSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.Function;
 
 import static ru.javawebinar.topjava.model.BaseEntity.START_SEQ;
 
@@ -22,7 +23,7 @@ public class  UserTestData {
     public static final User USER = new User(USER_ID, "User", "user@yandex.ru", "password", Role.ROLE_USER);
     public static final User ADMIN = new User(ADMIN_ID, "Admin", "admin@gmail.com", "admin", Role.ROLE_ADMIN);
 
-    public static final ModelMatcher<User, TestUser> MATCHER = new ModelMatcher<>(u -> ((u instanceof TestUser) ? (TestUser) u : new TestUser(u)));
+    public static final ModelMatcher<User, TestUser> MATCHER = new ModelMatcher<>((Function<User, TestUser>) u -> ((u instanceof TestUser) ? (TestUser) u : new TestUser(u)));
 
     public static class TestUser extends User {
 
