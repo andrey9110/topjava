@@ -1,9 +1,12 @@
 package ru.javawebinar.topjava.web;
 
 import org.junit.*;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import ru.javawebinar.topjava.UserTestData;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.repository.UserRepository;
@@ -17,25 +20,29 @@ import java.util.Collection;
 import static ru.javawebinar.topjava.UserTestData.ADMIN;
 import static ru.javawebinar.topjava.UserTestData.USER;
 
+@ContextConfiguration({"classpath:spring/spring-app.xml","classpath:spring/spring-db.xml"})
+
+@RunWith(SpringJUnit4ClassRunner.class)
 public class InMemoryAdminRestControllerTest {
-    private static ConfigurableApplicationContext appCtx;
-    private static AdminRestController controller;
+//    private static ConfigurableApplicationContext appCtx;
+//    private static AdminRestController controller;
 
-    @BeforeClass
-    public static void beforeClass() {
-        appCtx = new ClassPathXmlApplicationContext("classpath:spring/spring-app.xml","classpath:spring/spring-db.xml");
-        System.out.println("\n" + Arrays.toString(appCtx.getBeanDefinitionNames()) + "\n");
-        controller = appCtx.getBean(AdminRestController.class);
-    }
+//    @BeforeClass
+//    public static void beforeClass() {
+//        appCtx = new ClassPathXmlApplicationContext("classpath:spring/spring-app.xml","classpath:spring/spring-db.xml");
+//        System.out.println("\n" + Arrays.toString(appCtx.getBeanDefinitionNames()) + "\n");
+//        controller = appCtx.getBean(AdminRestController.class);
+//    }
 
-    @AfterClass
-    public static void afterClass() {
-        appCtx.close();
-    }
+
+    @Autowired
+    private AdminRestController controller;
+
+    @Autowired
+    private DbPopulator dbPopulator;
 
     @Before
     public void setUp() throws Exception {
-        DbPopulator dbPopulator = appCtx.getBean(DbPopulator.class);
         dbPopulator.execute();
     }
 
