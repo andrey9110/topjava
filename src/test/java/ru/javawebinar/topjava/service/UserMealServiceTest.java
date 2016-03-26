@@ -78,8 +78,7 @@ public class UserMealServiceTest {
     }
 
     @Test
-    public void testGetBetween() throws Exception {
-        MATCHER.assertCollectionEquals(Arrays.asList(MEAL3, MEAL2, MEAL1),
+    public void testGetBetween() throws Exception {MATCHER.assertCollectionEquals(Arrays.asList(MEAL3, MEAL2, MEAL1),
                 service.getBetweenDates(LocalDate.of(2015, Month.MAY, 30), LocalDate.of(2015, Month.MAY, 30), USER_ID));
     }
 }
