@@ -29,21 +29,28 @@ public class UserMeal extends BaseEntity {
     public static final String DELETE = "UserMeal.delete";
     public static final String GET_BETWEEN = "UserMeal.getBetween";
 
+
+
+
     @Column(name = "calories", nullable = false)
     @Range(min = 10, max = 5000)
     protected int calories;
+
+    @Column(name = "date_time", nullable = false)
     private LocalDateTime dateTime;
+
+    @Column(name = "description", nullable = false)
     private String description;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @Column(name = "date_time", nullable = false)
+
     @NotNull
     public UserMeal() {
     }
 
-    @Column(name = "description", nullable = false)
+
     @NotEmpty
     public UserMeal(LocalDateTime dateTime, String description, int calories) {
         this(null, dateTime, description, calories);
