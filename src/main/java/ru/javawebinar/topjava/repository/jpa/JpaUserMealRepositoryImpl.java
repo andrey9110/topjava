@@ -19,7 +19,7 @@ import java.util.List;
 
 @Repository
 @Transactional(readOnly = true)
-public class JpaUserMealRepositoryImpl implements UserMealRepository {
+public class  JpaUserMealRepositoryImpl implements UserMealRepository {
 
     @PersistenceContext
     private EntityManager em;
