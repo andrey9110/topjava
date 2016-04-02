@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Created by MyMac on 01.04.16.
  */
-@Transactional(readOnly = true)
+//@Transactional(readOnly = true)
 public interface ProxyUserMealRepository extends JpaRepository<UserMeal,Integer> {
 
     @Override
@@ -34,8 +34,12 @@ public interface ProxyUserMealRepository extends JpaRepository<UserMeal,Integer>
     @Query(name = UserMeal.ALL_SORTED)
     List<UserMeal> getAll(@Param("userId") int userId);
 
-    @Query(name = UserMeal.ALL_SORTED)
+    @Query(name = UserMeal.GET_BETWEEN)
     List<UserMeal> getBetween(@Param("startDate") LocalDateTime startDate,@Param("endDate") LocalDateTime endDate,@Param("userId") int userId);
+
+    @Transactional
+    @Query("SELECT m FROM UserMeal m JOIN FETCH m.user WHERE m.id=:id AND m.user.id=:userId")
+    UserMeal getWithUser(@Param("id") int id,@Param("userId") int userId);
 
 
 }

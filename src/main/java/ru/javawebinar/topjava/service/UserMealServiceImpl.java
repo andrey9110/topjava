@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.javawebinar.topjava.model.UserMeal;
 import ru.javawebinar.topjava.repository.UserMealRepository;
+import ru.javawebinar.topjava.repository.datajpa.DataJpaUserMealRepositoryImpl;
 import ru.javawebinar.topjava.util.exception.ExceptionUtil;
 
 import java.time.LocalDateTime;
@@ -21,6 +22,9 @@ public class UserMealServiceImpl implements UserMealService {
 
     @Autowired
     private UserMealRepository repository;
+
+    @Autowired
+    private DataJpaUserMealRepositoryImpl dataJpaRepository;
 
     @Override
     public UserMeal get(int id, int userId) {
@@ -50,5 +54,10 @@ public class UserMealServiceImpl implements UserMealService {
     @Override
     public UserMeal save(UserMeal meal, int userId) {
         return repository.save(meal, userId);
+    }
+
+    @Override
+    public UserMeal getWithUser(int id, int userId) {
+        return ExceptionUtil.check(dataJpaRepository.get(id, userId), id);
     }
 }

@@ -6,6 +6,8 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.repository.UserRepository;
+import ru.javawebinar.topjava.repository.datajpa.DataJpaUserMealRepositoryImpl;
+import ru.javawebinar.topjava.repository.datajpa.DataJpaUserRepositoryImpl;
 import ru.javawebinar.topjava.util.exception.ExceptionUtil;
 import ru.javawebinar.topjava.util.exception.NotFoundException;
 
@@ -22,6 +24,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository repository;
+
+    @Autowired
+    private DataJpaUserRepositoryImpl dataJpaUserRepository;
 
     @CacheEvict(value = "users", allEntries = true)
     public User save(User user) {
@@ -55,5 +60,10 @@ public class UserServiceImpl implements UserService {
     @CacheEvict(value = "users", allEntries = true)
     @Override
     public void evictCache() {
+    }
+
+    @Override
+    public User getWithUserMeal(int id) {
+        return ExceptionUtil.check(dataJpaUserRepository.getWithUserMeal(id),id);
     }
 }

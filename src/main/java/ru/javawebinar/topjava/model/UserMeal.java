@@ -41,7 +41,7 @@ public class UserMeal extends BaseEntity {
 
     @Column(name = "description", nullable = false)
     private String description;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
@@ -51,7 +51,7 @@ public class UserMeal extends BaseEntity {
     }
 
 
-    @NotEmpty
+//    @NotEmpty
     public UserMeal(LocalDateTime dateTime, String description, int calories) {
         this(null, dateTime, description, calories);
     }
