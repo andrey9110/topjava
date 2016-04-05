@@ -25,5 +25,7 @@ public interface UserMealRepository {
     // ORDERED dateTime
     Collection<UserMeal> getBetween(LocalDateTime startDate, LocalDateTime endDate, int userId);
 
-//    UserMeal getWithUser(int id, int userId);
+    default UserMeal getWithUser(int id, int userId){
+        throw new IllegalStateException("Method is not implemented");
+    }
 }

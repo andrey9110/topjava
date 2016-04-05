@@ -23,8 +23,8 @@ public class UserMealServiceImpl implements UserMealService {
     @Autowired
     private UserMealRepository repository;
 
-    @Autowired
-    private DataJpaUserMealRepositoryImpl dataJpaRepository;
+//    @Autowired
+//    private DataJpaUserMealRepositoryImpl dataJpaRepository;
 
     @Override
     public UserMeal get(int id, int userId) {
@@ -58,6 +58,6 @@ public class UserMealServiceImpl implements UserMealService {
 
     @Override
     public UserMeal getWithUser(int id, int userId) {
-        return ExceptionUtil.check(dataJpaRepository.get(id, userId), id);
+        return ExceptionUtil.check(repository.getWithUser(id, userId), id);
     }
 }

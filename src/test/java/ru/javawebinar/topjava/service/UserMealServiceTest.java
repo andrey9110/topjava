@@ -2,11 +2,13 @@ package ru.javawebinar.topjava.service;
 
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.rules.Stopwatch;
 import org.junit.runner.Description;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ActiveProfiles;
 
 import ru.javawebinar.topjava.MealTestData;
@@ -29,7 +31,8 @@ import static ru.javawebinar.topjava.UserTestData.USER_ID;
 
 abstract public class UserMealServiceTest extends DbTest {
     private static final Logger LOG = LoggerFactory.getLogger(UserMealServiceTest.class);
-
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
     @Rule
     public Stopwatch stopwatch = new Stopwatch() {
         private void logInfo(Description description, long nanos) {
@@ -41,8 +44,8 @@ abstract public class UserMealServiceTest extends DbTest {
             logInfo(description, nanos);
         }
     };
-
-
+    @Autowired
+    protected UserMealService mealService;
 
     @Test
     public void testDelete() throws Exception {
@@ -69,11 +72,7 @@ abstract public class UserMealServiceTest extends DbTest {
         MATCHER.assertEquals(ADMIN_MEAL, actual);
     }
 
-    @Test
-    public void testGetWith() throws Exception {
-        UserMeal actual = mealService.getWithUser(ADMIN_MEAL_ID, ADMIN_ID);
-        MATCHER_USER.assertEquals(UserTestData.ADMIN, actual.getUser());
-    }
+
 
     @Test
     public void testGetNotFound() throws Exception {

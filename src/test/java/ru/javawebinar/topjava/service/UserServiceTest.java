@@ -1,6 +1,10 @@
 package ru.javawebinar.topjava.service;
 
+import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.test.context.ActiveProfiles;
 import ru.javawebinar.topjava.MealTestData;
@@ -21,6 +25,16 @@ import static ru.javawebinar.topjava.UserTestData.*;
 
 
 abstract public class UserServiceTest extends DbTest{
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+    @Autowired
+    protected UserService userService;
+
+    @Before
+    public void setUp() throws Exception {
+        userService.evictCache();
+    }
 
     @Test
     public void testSave() throws Exception {
@@ -52,12 +66,7 @@ abstract public class UserServiceTest extends DbTest{
         MATCHER_USER.assertEquals(USER, user);
     }
 
-    @Test
-    public void testGetWithUserMeals() throws Exception {
-        User user = userService.getWithUserMeal(USER_ID);
-//        System.out.println(USER_ID);
-        MealTestData.MATCHER.assertCollectionEquals(Arrays.asList(  MEAL1, MEAL2, MEAL3, MEAL4, MEAL5,MEAL6), user.getMeals());
-    }
+
 
     @Test(expected = NotFoundException.class)
     public void testGetNotFound() throws Exception {

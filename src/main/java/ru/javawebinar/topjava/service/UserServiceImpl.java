@@ -25,8 +25,8 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository repository;
 
-    @Autowired
-    private DataJpaUserRepositoryImpl dataJpaUserRepository;
+//    @Autowired
+//    private DataJpaUserRepositoryImpl dataJpaUserRepository;
 
     @CacheEvict(value = "users", allEntries = true)
     public User save(User user) {
@@ -64,6 +64,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getWithUserMeal(int id) {
-        return ExceptionUtil.check(dataJpaUserRepository.getWithUserMeal(id),id);
+        return ExceptionUtil.check(repository.getWithUserMeal(id),id);
     }
 }

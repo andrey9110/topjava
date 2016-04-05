@@ -29,5 +29,5 @@ public interface UserMealService {
 
     UserMeal save(UserMeal meal, int userId);
 
-    public UserMeal getWithUser(int id, int userId);
+  UserMeal getWithUser(int id, int userId);
 }

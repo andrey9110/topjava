@@ -9,4 +9,5 @@ import ru.javawebinar.topjava.service.UserMealServiceTest;
  */
 @ActiveProfiles({Profiles.POSTGRES,Profiles.JDBC})
 public class JdbcUserMealServiceTest extends UserMealServiceTest{
+
 }

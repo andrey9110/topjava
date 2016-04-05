@@ -20,17 +20,4 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 @Sql(scripts = "classpath:db/populateDB.sql", config = @SqlConfig(encoding = "UTF-8"))
 public abstract class DbTest {
-
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
-
-    @Autowired
-    protected UserService userService;
-
-    @Autowired
-    protected UserMealService mealService;
-    @Before
-    public void setUp() throws Exception {
-        userService.evictCache();
-    }
 }

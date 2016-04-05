@@ -21,4 +21,8 @@ public interface UserRepository {
     User getByEmail(String email);
 
     List<User> getAll();
+
+    default User getWithUserMeal(int id) {
+        throw new IllegalStateException("Method is not implemented");
+    }
 }
