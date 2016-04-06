@@ -23,6 +23,6 @@ public interface UserRepository {
     List<User> getAll();
 
     default User getWithUserMeal(int id) {
-        throw new IllegalStateException("Method is not implemented");
+        throw new UnsupportedOperationException("Method is not implemented");
     }
 }

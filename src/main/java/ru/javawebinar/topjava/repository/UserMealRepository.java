@@ -26,6 +26,6 @@ public interface UserMealRepository {
     Collection<UserMeal> getBetween(LocalDateTime startDate, LocalDateTime endDate, int userId);
 
     default UserMeal getWithUser(int id, int userId){
-        throw new IllegalStateException("Method is not implemented");
+        throw new UnsupportedOperationException("Method is not implemented");
     }
 }

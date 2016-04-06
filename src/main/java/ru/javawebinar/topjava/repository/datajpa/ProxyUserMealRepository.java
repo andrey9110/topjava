@@ -19,7 +19,6 @@ import java.util.List;
 public interface ProxyUserMealRepository extends JpaRepository<UserMeal,Integer> {
 
     @Override
-    @Transactional
     UserMeal save(UserMeal meal);
 
     @Transactional
@@ -38,7 +37,7 @@ public interface ProxyUserMealRepository extends JpaRepository<UserMeal,Integer>
     List<UserMeal> getBetween(@Param("startDate") LocalDateTime startDate,@Param("endDate") LocalDateTime endDate,@Param("userId") int userId);
 
     @Transactional
-    @Query("SELECT m FROM UserMeal m JOIN FETCH m.user WHERE m.id=:id AND m.user.id=:userId")
+    @Query("SELECT m FROM UserMeal m JOIN FETCH m.user WHERE m.id=:id AND m.user.id=:userId ORDER BY m.dateTime DESC ")
     UserMeal getWithUser(@Param("id") int id,@Param("userId") int userId);
 
 
