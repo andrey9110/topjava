@@ -52,7 +52,7 @@ public class UserMeal extends BaseEntity {
     }
 
 
-    @NotEmpty
+
     public UserMeal(LocalDateTime dateTime, String description, int calories) {
         this(null, dateTime, description, calories);
     }
