@@ -20,20 +20,20 @@ import java.util.List;
  */
 
 public abstract class AbstractJdbcUserMealRepositoryImpl<T> implements UserMealRepository {
-    private final RowMapper<UserMeal> rowMapper;
     @Autowired
     private JdbcTemplate jdbcTemplate;
     @Autowired
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
-    private SimpleJdbcInsert insertUserMeal;
-
     public AbstractJdbcUserMealRepositoryImpl(RowMapper<UserMeal> rowMapper, DataSource dataSource) {
         this.rowMapper = rowMapper;
         this.insertUserMeal = new SimpleJdbcInsert(dataSource)
                 .withTableName("meals")
                 .usingGeneratedKeyColumns("id");
-
     }
+
+    private final SimpleJdbcInsert insertUserMeal;
+
+    private final RowMapper<UserMeal> rowMapper;
 
     protected abstract T toDbValue(LocalDateTime ldt);
 
